@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:instagram_clone/src/init/init.dart';
 import 'package:instagram_clone/src/models/index.dart';
 import 'package:instagram_clone/src/presentations/routes.dart';
@@ -16,7 +17,6 @@ class InstagramClone extends StatefulWidget {
 }
 
 class _InstagramCloneState extends State<InstagramClone> {
-
   Future<Store<AppState>> _future;
 
   @override
@@ -27,10 +27,34 @@ class _InstagramCloneState extends State<InstagramClone> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Instagram',
-      theme: ThemeData.dark(),
-      routes: AppRoutes.routes,
+    return FutureBuilder<Store<AppState>>(
+      future: _future,
+      builder: (BuildContext context, AsyncSnapshot<Store<AppState>> snapshot) {
+        if (snapshot.hasData) {
+          final Store<AppState> store = snapshot.data;
+
+          return StoreProvider<AppState>(
+            store: store,
+            child: MaterialApp(
+              title: 'Instagram',
+              theme: ThemeData.dark(),
+              routes: AppRoutes.routes,
+            ),
+          );
+        } else {
+          if (snapshot.hasError) {
+            throw snapshot.error;
+          }
+
+          return const MaterialApp(
+            home: Scaffold(
+              body: Center(
+                child: CircularProgressIndicator(),
+              ),
+            ),
+          );
+        }
+      },
     );
   }
 }

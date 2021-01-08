@@ -1,33 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_clone/src/init/init.dart';
+import 'package:instagram_clone/src/models/index.dart';
+import 'package:instagram_clone/src/presentations/routes.dart';
+import 'package:redux/redux.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const InstagramClone());
 }
 
-class MyApp extends StatelessWidget {
+class InstagramClone extends StatefulWidget {
+  const InstagramClone({Key key}) : super(key: key);
+
+  @override
+  _InstagramCloneState createState() => _InstagramCloneState();
+}
+
+class _InstagramCloneState extends State<InstagramClone> {
+
+  Future<Store<AppState>> _future;
+
+  @override
+  void initState() {
+    super.initState();
+    _future = init();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Instagram',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const HomePage(),
+      theme: ThemeData.dark(),
+      routes: AppRoutes.routes,
     );
   }
 }
-
-class HomePage extends StatefulWidget {
-  const HomePage({Key key}):super(key: key);
-
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
-

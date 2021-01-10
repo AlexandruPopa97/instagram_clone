@@ -7,7 +7,6 @@ import 'package:instagram_clone/src/models/index.dart';
 import 'package:redux/redux.dart';
 import 'package:rxdart/rxdart.dart';
 
-
 mixin InitMixin<S extends StatefulWidget> on State<S> {
   final Completer<Store<AppState>> _completer = Completer<Store<AppState>>();
 
@@ -23,8 +22,7 @@ mixin InitMixin<S extends StatefulWidget> on State<S> {
       Future<void>.delayed(const Duration(seconds: 2)).asStream(),
     ]).toList();
 
-    final FutureOr<Store<AppState>> res =
-        result[0] as FutureOr<Store<AppState>>;
+    final FutureOr<Store<AppState>> res = result[0] as FutureOr<Store<AppState>>;
     _completer.complete(res);
   }
 

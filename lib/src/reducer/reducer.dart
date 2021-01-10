@@ -5,9 +5,6 @@ Reducer<AppState> reducer = combineReducers(<Reducer<AppState>>[
   _reducer,
 ]);
 
-
 AppState _reducer(AppState state, dynamic action) {
-  state.rebuild((b){
-
-  });
+  state.rebuild((AppStateBuilder b) {});
 }

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:instagram_clone/src/models/index.dart';
@@ -17,9 +16,7 @@ class InstagramClone extends StatefulWidget {
   _InstagramCloneState createState() => _InstagramCloneState();
 }
 
-class _InstagramCloneState extends State<InstagramClone> with InitMixin<InstagramClone>{
-
-
+class _InstagramCloneState extends State<InstagramClone> with InitMixin<InstagramClone> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Store<AppState>>(
